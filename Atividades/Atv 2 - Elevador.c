@@ -114,7 +114,7 @@ int main()
                 mostrarFila(&fila); // Mostra a fila de andares
                 andarAtual = fila.dados[fila.ultimo]; // Atualiza o andar atual com o último valor na fila
                 printf("Você está atualmente está no %i° andar\n", andar); // Mostra o andar atual
-                criarFila(&fila, 12); // Reinicializa a fila (isto pode ser um erro de lógica, pois a fila é criada novamente)
+                criarFila(&fila, 12); // Reinicializa a fila
             }
         }
     }
