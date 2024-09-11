@@ -82,11 +82,11 @@ void preencherPilha(pilha *p, int QuantidadeDisco){
 
 
 void printpilha(pilha *p,int quantidade){
-    for(int i = 0, j =quantidade; Max > i; i++,j-=2){
+    for(int i = Max, j=quantidade;i > 0; i--,j-=2){
         if(p->topo > i){
             int k = j-(i*2);
             int referencia = k-2;
-            l = (j-referencia)/2;
+            int l = (j-referencia)/2;
             for(; k >= 0; k--){
                 if(k<l){
                     printf(" ");
@@ -100,6 +100,8 @@ void printpilha(pilha *p,int quantidade){
                     printf("\n");
                 }
             }
+        }else{
+            j=quantidade;
         }
         if(i==Max -1){
             printf("\n\n");
