@@ -32,7 +32,7 @@ int IsFull(pilha *p){
 }
 
 void Push(pilha *p, int valor){
-    if(IsFull){
+    if(IsFull(p)){
         printf("A pilha está cheia!\n");
     }else{
         p->topo++;
@@ -41,7 +41,7 @@ void Push(pilha *p, int valor){
 }
 
 int pop(pilha *p){
-    if(isVazia){
+    if(isVazia(p)){
         printf("A pilha já está vazia");
         return -1;
     }else{
@@ -56,7 +56,7 @@ int peek(pilha *p){
 // Começando o exercicio 
 
 void preencherPilha(pilha *p, int QuantidadeDisco){
-    if(QuantidadeDisco < Max){
+    if(QuantidadeDisco <= Max - 1){
         for(int i = QuantidadeDisco;i>0;i--){
             Push(p,i);
         }
@@ -80,23 +80,29 @@ void preencherPilha(pilha *p, int QuantidadeDisco){
 }
 */
 
-void printpilha(pilha *p){
-    for(int i = Max, j =1; 0 < i; i--,j+=2){
+
+void printpilha(pilha *p,int quantidade){
+    for(int i = 0, j =quantidade; Max > i; i++,j-=2){
         if(p->topo > i){
-            for(int k = j+2; k > 0; k--){
-                int l = (k-j)/2;
-                if(k<=l){
+            int k = j-(i*2);
+            int referencia = k-2;
+            l = (j-referencia)/2;
+            for(; k >= 0; k--){
+                if(k<l){
                     printf(" ");
-                }else if(k <= j && k>l){
+                }else if(k <= referencia && k>=l){
                     printf("%d", p->itens[i]);
                 } else {
                     printf(" ");
                 }
                 
-                if(k==1){
-                    printf("\n\n\n");
+                if(k==0){
+                    printf("\n");
                 }
             }
+        }
+        if(i==Max -1){
+            printf("\n\n");
         }
     }
     
@@ -114,17 +120,17 @@ int efetuarTrocaDeBases(pilha *p, pilha *p2){
 
 void jogarJogo(pilha *p,pilha *p2,pilha *p3){
     int onde,ir, ganhou = 0, contadorDeJogadas = 0;
-    int quantidade = p->topo;
+    int quantidade = p->topo +1;
     printf("Numero ideal de Jogadas:%0.0f\n", (pow(2,quantidade) - 1));
     
     do{
         printf("Numero De Jogadas Feitas:%d\n",contadorDeJogadas++);
         printf("Pilha 1:\n");
-        printpilha(p);
+        printpilha(p,quantidade);
         printf("Pilha 2:\n");
-        printpilha(p2);
+        printpilha(p2,quantidade);
         printf("Pilha 3:\n");
-        printpilha(p3);
+        printpilha(p3,quantidade);
         printf("\n\n");
         printf("Qual torre vc quer tirar?");
         scanf("%d",&onde);
