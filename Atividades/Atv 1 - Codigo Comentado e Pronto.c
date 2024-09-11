@@ -175,7 +175,8 @@ void mostrarJogadores(fila *f) {
     int cont, i;
 
     for (cont = 0, i = f->comeco; cont < f->tamanho; cont++) {
-        printf("Jogadores: %s - Tipo de jogada:%d \n", f->Jogadores[i].nome, f->itens[i++]);
+        printf("Jogadores: %s - Tipo de jogada:%d \n", f->Jogadores[i].nome, f->itens[i]);
+        i++;
         if (i == f->tamanho + 1)
             i = 0;
     }
