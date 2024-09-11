@@ -191,7 +191,7 @@ void chaveamento(fila *f, fila *temporaria, int rodadas) {
         for (cont = 0, i = f->comeco; cont < f->tamanho; cont += 2) {
             if (i + 1 >= Max) {
                 i2 = 0;
-            } else if (i + 1 > f->tamanho) {
+            } else if (i + 1 >= f->tamanho) {
                 break;
             } else {
                 i2 = i + 1;
