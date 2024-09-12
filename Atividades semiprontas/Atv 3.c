@@ -130,7 +130,6 @@ int efetuarTrocaDeBases(pilha *p, pilha *p2){
         Push(p2,0);
         flag = 1;
     }
-    int i = peek(p), k = peek(p2);
     if((peek(p2) < peek(p) && !flag)){
         return 0;
     }else{
