@@ -42,7 +42,7 @@ void Push(pilha *p, int valor){
 
 int pop(pilha *p){
     if(isVazia(p)){
-        printf("A pilha já está vazia");
+        printf("A pilha já está vazia\n");
         return -1;
     }else{
         return p->itens[(p->topo--)];
@@ -89,7 +89,11 @@ void printpilha(pilha *p){
     printf("%d]\n",peek(p));}
 }
 
-
+int pegarTopo(pilha *p){
+    if(!isVazia(p)){
+        return p->topo;
+    }
+}
 
 /*void printilha(pilha *p,int quantidade){
     for(int i = Max, j=quantidade;i > 0; i--,j-=2){
@@ -121,21 +125,30 @@ void printpilha(pilha *p){
 }
 */
 int efetuarTrocaDeBases(pilha *p, pilha *p2){
-    if(peek(p2) < peek(p)|| (!isVazia(p) && !isVazia(p2))){
+    int flag = 0;
+    if(isVazia(p2)){
+        Push(p2,0);
+        flag = 1;
+    }
+    int i = peek(p), k = peek(p2);
+    if((peek(p2) < peek(p) && !flag)){
         return 0;
     }else{
+        if(flag){
+            p2->topo--;
+        }
         int aux = pop(p);
-        Push(p,aux);
+        Push(p2,aux);
         return 1;
     }
 }
 
 void jogarJogo(pilha *p,pilha *p2,pilha *p3){
-    int onde,ir, ganhou = 0, contadorDeJogadas = 0;
-    int quantidade = p->topo +1;
+    int onde,ir, ganhou = 1, contadorDeJogadas = 0;
+    int quantidade = p->topo;
     printf("Numero ideal de Jogadas:%0.0f\n", (pow(2,quantidade) - 1));
     
-    do{
+    while(ganhou){
         printf("Numero De Jogadas Feitas:%d\n",contadorDeJogadas++);
         printf("Pilha 1:\n");
         printpilha(p);
@@ -153,49 +166,49 @@ void jogarJogo(pilha *p,pilha *p2,pilha *p3){
             if(!efetuarTrocaDeBases(p,p2)){
                 printf("Não pode colocar o disco maior, já que o outro pino possui um disco menor\n");
             }
-            if(IsFull(p2) || IsFull(p3)){
-                ganhou = 1;
+            if(p2->topo == quantidade || p3->topo == quantidade){
+                ganhou = 0;
             }
         }else if(onde == 1 && ir == 3){
             if(!efetuarTrocaDeBases(p,p3)){
                 printf("Não pode colocar o disco maior, já que o outro pino possui um disco menor\n");
             }
-            if(IsFull(p2) || IsFull(p3)){
-                ganhou = 1;
+            if(p2->topo == quantidade || p3->topo == quantidade){
+                ganhou = 0;
             }
         }else if(onde == 2 && ir == 1){
             if(!efetuarTrocaDeBases(p2,p)){
                 printf("Não pode colocar o disco maior, já que o outro pino possui um disco menor\n");
             }
-            if(IsFull(p2) || IsFull(p3)){
-                ganhou = 1;
+            if(p2->topo == quantidade || p3->topo == quantidade){
+                ganhou = 0;
             }
         }else if(onde == 2 && ir == 3){
             if(!efetuarTrocaDeBases(p2,p3)){
                 printf("Não pode colocar o disco maior, já que o outro pino possui um disco menor\n");
             }
-            if(IsFull(p2) || IsFull(p3)){
-                ganhou = 1;
+            if(p2->topo == quantidade || p3->topo == quantidade){
+                ganhou = 0;
             }
         }else if(onde == 3 && ir == 1){
             if(!efetuarTrocaDeBases(p3,p)){
                 printf("Não pode colocar o disco maior, já que o outro pino possui um disco menor\n");
             }
-            if(IsFull(p2) || IsFull(p3)){
-                ganhou = 1;
+            if(p2->topo == quantidade || p3->topo == quantidade){
+                ganhou = 0;
             }
         }else if(onde == 3 && ir == 2){
             if(!efetuarTrocaDeBases(p3,p2)){
                 printf("Não pode colocar o disco maior, já que o outro pino possui um disco menor\n");
             }
-            if(IsFull(p2) || IsFull(p3)){
-                ganhou = 1;
+            if(p2->topo == quantidade || p3->topo == quantidade){
+                ganhou = 0;
             }
         }else{
             printf("Digite Certo! Não tem sentido tirar um disco e colocalo no mesmo lugar\n!");
         }
         
-    }while(ganhou);
+    };
 }
 
 int main()
