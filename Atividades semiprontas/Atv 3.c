@@ -24,11 +24,11 @@ void iniciador(pilha *p){
 }
 
 int isVazia(pilha *p){
-    return p->topo == 1;
+    return p->topo == -1;
 }
 
 int IsFull(pilha *p){
-    return p->topo == Max ;
+    return p->topo == Max - 1;
 }
 
 void Push(pilha *p, int valor){
@@ -56,7 +56,7 @@ int peek(pilha *p){
 // Começando o exercicio 
 
 void preencherPilha(pilha *p, int QuantidadeDisco){
-    if(QuantidadeDisco <= Max - 1){
+    if(QuantidadeDisco <= Max){
         for(int i = QuantidadeDisco;i>0;i--){
             Push(p,i);
         }
@@ -80,8 +80,18 @@ void preencherPilha(pilha *p, int QuantidadeDisco){
 }
 */
 
+void printpilha(pilha *p){
+  if(!isVazia(p)){  
+    printf("[");
+    for(int i = 0; i<p->topo;i++){
+        printf("%d, ",p->itens[i]);
+    }
+    printf("%d]\n",peek(p));}
+}
 
-void printpilha(pilha *p,int quantidade){
+
+
+/*void printilha(pilha *p,int quantidade){
     for(int i = Max, j=quantidade;i > 0; i--,j-=2){
         if(p->topo > i){
             int k = j-(i*2);
@@ -109,9 +119,9 @@ void printpilha(pilha *p,int quantidade){
     }
     
 }
-
+*/
 int efetuarTrocaDeBases(pilha *p, pilha *p2){
-    if(peek(p2) < peek(p)){
+    if(peek(p2) < peek(p)|| (!isVazia(p) && !isVazia(p2))){
         return 0;
     }else{
         int aux = pop(p);
@@ -128,11 +138,11 @@ void jogarJogo(pilha *p,pilha *p2,pilha *p3){
     do{
         printf("Numero De Jogadas Feitas:%d\n",contadorDeJogadas++);
         printf("Pilha 1:\n");
-        printpilha(p,quantidade);
+        printpilha(p);
         printf("Pilha 2:\n");
-        printpilha(p2,quantidade);
+        printpilha(p2);
         printf("Pilha 3:\n");
-        printpilha(p3,quantidade);
+        printpilha(p3);
         printf("\n\n");
         printf("Qual torre vc quer tirar?");
         scanf("%d",&onde);
