@@ -11,7 +11,7 @@ typedef struct {
 // Definição da estrutura da pilha
 typedef struct {
     int topo;
-    notacao *itens[TAM_MAX];
+    notacao itens[TAM_MAX];
 } Pilha;
 
 // Função para inicializar a pilha
@@ -30,11 +30,11 @@ int isEmpty(Pilha *p) {
 }
 
 // Função para empilhar um elemento
-void push(Pilha *p, char *valor) {
+void push(Pilha *p, char valor[]) {
     if (isFull(p)) {
         printf("Erro: A pilha está cheia!\n\n");
     } else {
-        strcpy(p->itens[++(p->topo)]->notacaofixa, valor);
+        strcpy(p->itens[++(p->topo)].notacaofixa, valor);
     }
 }
 
@@ -44,7 +44,7 @@ char* pop(Pilha *p) {
         printf("Erro: A pilha está vazia!\n\n");
         return NULL;  // Retorna NULL para indicar erro
     } else {
-        return p->itens[(p->topo)--]->notacaofixa;
+        return p->itens[(p->topo)--].notacaofixa;
     }
 }
 
@@ -54,7 +54,7 @@ char* peek(Pilha *p) {
         printf("A pilha está vazia.\n\n");
         return NULL;
     } else {
-        return p->itens[p->topo]->notacaofixa;
+        return p->itens[p->topo].notacaofixa;
     }
 }
 
@@ -62,7 +62,7 @@ char* peek(Pilha *p) {
 void printStack(Pilha *p) {
     if (!isEmpty(p)) {  
         for (int i = 0; i <= p->topo; i++) {
-            printf("%s\n", p->itens[i]->notacaofixa);
+            printf("%s\n", p->itens[i].notacaofixa);
         }
     } else {
         printf("A pilha está vazia.\n\n");
@@ -80,16 +80,12 @@ int main() {
     scanf("%[^\n]", notacaoinfixadousuario);
      
     tamanhonotacaofixa = strlen(notacaoinfixadousuario);
+    printf("%i", tamanhonotacaofixa);
+    printf("%c",notacaoinfixadousuario[0]);
     
     push(&NP,notacaoinfixadousuario[0]);
     
-    for(int i = 1;  i <  tamanhonotacaofixa; i++){
-        if(notacaoinfixadousuario[i] == '-' || notacaoinfixadousuario[i] == '/' || notacaoinfixadousuario[i] == '+' || notacaoinfixadousuario[i] == '^' || notacaoinfixadousuario[i] == '*'){
-            push(&NP,notacaoinfixadousuario[i+1]);
-            push(&NP,notacaoinfixadousuario[i]);
-        }
-    }
-    printStack(&NP);
+    
 
     return 0;
 }
