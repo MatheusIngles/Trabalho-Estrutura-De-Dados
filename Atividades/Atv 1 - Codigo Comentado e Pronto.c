@@ -141,7 +141,7 @@ void PopularRivais(fila *f, int Jogadores) {
         for (int i = 0; i < Jogadores; i++) {
             Jogadore j;
             int tipo;
-            a = (rand() % 4) + 1;
+            a = (rand() % 20) + 1;
             switch (a) {
                 case 1:
                     strcpy(j.nome, "Julia");
@@ -158,8 +158,108 @@ void PopularRivais(fila *f, int Jogadores) {
                     tipo = (rand() % 3) + 1;
                     AdicionarJogador(f, &j, tipo);
                     break;
-                case 4:
+                case 5:
                     strcpy(j.nome, "Lucas");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 6:
+                    strcpy(j.nome, "Marcus");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 7:
+                    strcpy(j.nome, "Adolfo");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 8:
+                    strcpy(j.nome, "Guiberto");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 9:
+                    strcpy(j.nome, "Ana");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 10:
+                    strcpy(j.nome, "Elena");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 11:
+                    strcpy(j.nome, "Maria");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 12:
+                    strcpy(j.nome, "Estevao");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 13:
+                    strcpy(j.nome, "Michael");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 14:
+                    strcpy(j.nome, "Bruno");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 15:
+                    strcpy(j.nome, "Pablo");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 16:
+                    strcpy(j.nome, "Hery");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 17:
+                    strcpy(j.nome, "Alexa");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 18:
+                    strcpy(j.nome, "Oto");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 19:
+                    strcpy(j.nome, "Jun");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 20:
+                    strcpy(j.nome, "Rich");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 21:
+                    strcpy(j.nome, "Berno");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 22:
+                    strcpy(j.nome, "Harry");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 23:
+                    strcpy(j.nome, "Bassul");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 24:
+                    strcpy(j.nome, "Bonato");
+                    tipo = (rand() % 3) + 1;
+                    AdicionarJogador(f, &j, tipo);
+                    break;
+                case 25:
+                    strcpy(j.nome, "Scooby");
                     tipo = (rand() % 3) + 1;
                     AdicionarJogador(f, &j, tipo);
                     break;
