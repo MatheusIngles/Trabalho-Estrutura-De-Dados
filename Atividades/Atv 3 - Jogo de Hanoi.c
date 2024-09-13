@@ -168,11 +168,11 @@ int main()
 {
     pilha Pinos, Pinos2, Pinos3;  // Declaração de três pilhas representando os três pinos
     int QuantidadeDisco, escolha;
-    iniciador(&Pinos);
-    iniciador(&Pinos2);
-    iniciador(&Pinos3);
-    
+        
     while(1){
+        iniciador(&Pinos);
+        iniciador(&Pinos2);
+        iniciador(&Pinos3);
         printf("O que quer fazer?\n1- Jogar \nDiferente de 1- Sair!\n");
         scanf("%d", &escolha);
         if(escolha == 1){
