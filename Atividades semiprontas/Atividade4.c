@@ -52,12 +52,11 @@ int isEmpty(Pilha *p) {
 }
 
 // Função para empilhar um elemento
-void push(Pilha *p, char *valor) {
+void push(Pilha *p, char valor) {
     if (isFull(p)) {
         printf("Erro: A pilha está cheia!\n\n");
     } else {
-        strcpy(p->itens[++(p->topo)].notacaofixa, valor);
-        p->itens[p->topo].notacaofixa[TAM_MAX];  
+        p->itens[++(p->topo)].notacaofixa[0] = valor;
     }
 }
 
@@ -85,7 +84,7 @@ char* peek(Pilha *p) {
 void printStack(Pilha *p) {
     if (!isEmpty(p)) {  
         for (int i = 0; i <= p->topo; i++) {
-            printf("%s\n", p->itens[i].notacaofixa);
+            printf("%s", p->itens[i].notacaofixa);
         }
     } else {
         printf("A pilha está vazia.\n\n");
@@ -104,13 +103,17 @@ int main() {
      
     tamanhonotacaofixa = strlen(notacaoinfixadousuario);
     
-    push(&NP,&notacaoinfixadousuario[0]);
-    
-    for(int i = 1;  i <  tamanhonotacaofixa; i++){
-        if(notacaoinfixadousuario[i] == '-' || notacaoinfixadousuario[i] == '/' || notacaoinfixadousuario[i] == '+' || notacaoinfixadousuario[i] == '^' || notacaoinfixadousuario[i] == '*'){
-            push(&NP,&notacaoinfixadousuario[i+1]);
-            push(&NP,&notacaoinfixadousuario[i]);
-        }
+    for(int i = 0;  i < tamanhonotacaofixa; i++){
+         if(notacaoinfixadousuario[i] == '-' || notacaoinfixadousuario[i] == '/'
+         || notacaoinfixadousuario[i] == '+' || notacaoinfixadousuario[i] == '^' 
+         || notacaoinfixadousuario[i] == '*'){
+                push(&NP,notacaoinfixadousuario[i+1]);
+                push(&NP,notacaoinfixadousuario[i]);
+                i++;
+      }
+      else{
+          push(&NP,notacaoinfixadousuario[i]);
+      }
     }
     printStack(&NP);
 
