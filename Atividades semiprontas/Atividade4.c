@@ -116,8 +116,7 @@ int main() {
         } else if(c == '+' || c == '-' || c == '/' || c == '^' || c == '*'){
             // Processa operadores com base na precedência (aqui que está o pulo do gato)
             while(!isEmpty(&pilha) && (
-                 (peek(&pilha) == '*' || peek(&pilha) == '/') && (c == '+' || c == '-') || 
-                 ( peek(&pilha) == '-' || peek(&pilha) == '*') && (c == '/' || c =='^'))){
+                 (peek(&pilha) == '*' || peek(&pilha) == '/') && (c == '+' || c == '-'))){
                 notacaopolonesareversa[indice++] = pop(&pilha);
             }
             push(&pilha, c); // Empilha o operador atual
