@@ -1,3 +1,5 @@
+// Nome: Matheus Endlich Silveira - Matricula:202305392
+// Nome: Rafael Ferreira Bassul - Matricula: 202305395
 /*Desenvolva um algoritmo para converter uma expressão aritmética da notação infixa (onde os
 operadores são colocados entre os operandos) para a notação pós-fixa (também conhecida
 como notação polonesa reversa - RPN), onde os operadores são colocados após seus operandos.
@@ -16,9 +18,6 @@ não devem aparecer na saída pós-fixa. Seu código será avaliado pela correç
 eficiência do algoritmo e pela clareza da implementação. Certifique-se de incluir comentários
 explicativos no código.
 */
-
-// Nome: Matheus Endlich Silveira - Matricula:202305392
-// Nome: Rafael Ferreira Bassul - Matricula: 202305395
 
 #include <stdio.h>   // Inclui a biblioteca padrão de entrada e saída
 #include <string.h>  // Inclui a biblioteca de manipulação de strings
