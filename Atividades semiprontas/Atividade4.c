@@ -1,66 +1,48 @@
-/*Desenvolva um algoritmo para converter uma expressão aritmética da notação infixa (onde os
-operadores são colocados entre os operandos) para a notação pós-fixa (também conhecida
-como notação polonesa reversa - RPN), onde os operadores são colocados após seus operandos.
-O programa deve receber uma expressão aritmética em notação infixa. A expressão pode conter
-os operadores +, -, *, /, e ^ (exponenciação), além de parênteses ( e ). A expressão pode incluir
-variáveis (representadas por letras) ou números (opcionais).
-Exemplos de entrada incluem A + B * (C ^ D - E) ^ (F + G * H) - I, 3 + 4 * 2 / (1 - 5) ^ 2 ^ 3, A * (B
-+ C) / D, e (A + B) * (C + D). A saída deve ser a expressão correspondente em notação pós-fixa: A
-B C D ^ E - F G H * + ^ * + I -, 3 4 2 * 1 5 - 2 3 ^ ^ / +, A B C + * D /, e A B + C D + *, respectivamente. 
-
-Utilize uma estrutura de dados pilha para armazenar operadores e gerenciar sua precedência. A
-precedência dos operadores é a seguinte: ^ tem a maior precedência, seguido por * e /, e depois
-por + e -. A associatividade dos operadores é da esquerda para a direita, exceto para ^, que é da
-direita para a esquerda. Os parênteses na notação infixa definem a ordem das operações, mas
-não devem aparecer na saída pós-fixa. Seu código será avaliado pela correção da conversão, pela
-eficiência do algoritmo e pela clareza da implementação. Certifique-se de incluir comentários
-explicativos no código.
-*/
-
 // Nome: Matheus Endlich Silveira - Matricula:202305392
 // Nome: Rafael Ferreira Bassul - Matricula: 202305395
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <stdio.h>   // Inclui a biblioteca padrão de entrada e saída
+#include <string.h>  // Inclui a biblioteca de manipulação de strings
+#include <stdlib.h>  // Inclui a biblioteca de funções utilitárias (por exemplo, malloc, free)
 
+// Define o tamanho máximo da pilha
 #define TAM_MAX 100
 
-// Definição da estrutura da pilha
+// Define a estrutura da pilha
 typedef struct {
-    int topo;        // Índice do topo da pilha
+    int topo;        // Índice que indica a posição do topo da pilha
     char itens[TAM_MAX]; // Array para armazenar os itens da pilha
 } Pilha;
 
 // Função para inicializar a pilha
 void stack(Pilha *p) {
-    p->topo = -1; // Inicializa a pilha vazia, com topo em -1
+    p->topo = -1; // Inicializa a pilha como vazia, topo está em -1
 }
 
 // Função para verificar se a pilha está cheia
 int isFull(Pilha *p) {
-    return (p->topo == TAM_MAX - 1); // Retorna 1 se a pilha estiver cheia
+    return (p->topo == TAM_MAX - 1); // Retorna 1 se o topo estiver no último índice (cheia), 0 caso contrário
 }
 
 // Função para verificar se a pilha está vazia
 int isEmpty(Pilha *p) {
-    return (p->topo == -1); // Retorna 1 se a pilha estiver vazia
+    return (p->topo == -1); // Retorna 1 se o topo estiver em -1 (vazia), 0 caso contrário
 }
 
 // Função para empilhar um elemento
 void push(Pilha *p, char valor) {
     if (isFull(p)) {
-        printf("Erro: A pilha está cheia!\n\n"); // Mensagem de erro se a pilha estiver cheia
+        printf("Erro: A pilha está cheia!\n\n"); // Imprime mensagem de erro se a pilha estiver cheia
     } else {
-        p->itens[++(p->topo)] = valor; // Incrementa o topo e adiciona o valor
+        p->itens[++(p->topo)] = valor; // Incrementa o topo e adiciona o valor ao topo
     }
 }
 
 // Função para desempilhar um elemento
 char pop(Pilha *p) {
     if (isEmpty(p)) {
-        printf("Erro: A pilha está vazia!\n\n"); // Mensagem de erro se a pilha estiver vazia
-        return '\0';  // Retorna NULL para indicar erro
+        printf("Erro: A pilha está vazia!\n\n"); // Imprime mensagem de erro se a pilha estiver vazia
+        return '\0';  // Retorna '\0' para indicar que ocorreu um erro
     } else {
         return p->itens[(p->topo)--]; // Retorna o valor do topo e decrementa o topo
     }
@@ -69,8 +51,8 @@ char pop(Pilha *p) {
 // Função para visualizar o elemento no topo da pilha
 char peek(Pilha *p) {
     if (isEmpty(p)) {
-        printf("A pilha está vazia.\n\n"); // Mensagem se a pilha estiver vazia
-        return '\0';
+        printf("A pilha está vazia.\n\n"); // Imprime mensagem se a pilha estiver vazia
+        return '\0'; // Retorna '\0' para indicar que a pilha está vazia
     } else {
         return p->itens[p->topo]; // Retorna o valor do topo da pilha
     }
@@ -83,19 +65,19 @@ void printStack(Pilha *p) {
             printf("%c", p->itens[i]); // Imprime todos os elementos da pilha
         }
     } else {
-        printf("A pilha está vazia.\n\n"); // Mensagem se a pilha estiver vazia
+        printf("A pilha está vazia.\n\n"); // Imprime mensagem se a pilha estiver vazia
     }
 }
 
-// Função principal para testar a pilha e converter a notação
+// Função principal que realiza a conversão da notação infixa para pós-fixa
 int main() {
-    Pilha pilha; // Cria uma nova pilha
-    char notacaofixa[TAM_MAX], notacaopolonesareversa[TAM_MAX]; // Strings para notação infixa e pós-fixa
-    int tamanhonotacaofixa, indice = 0; // Tamanho da notação infixa e índice para a notação pós-fixa
-    stack(&pilha); // Inicializa a pilha com topo -1
+    Pilha pilha; // Cria uma nova pilha para operadores
+    char notacaofixa[TAM_MAX], notacaopolonesareversa[TAM_MAX]; // Strings para armazenar a notação infixa e pós-fixa
+    int tamanhonotacaofixa, indice = 0; // Tamanho da expressão infixa e índice para a notação pós-fixa
+    stack(&pilha); // Inicializa a pilha com topo em -1
     
     printf("Coloque sua notação: ");
-    scanf("\n%[^\n]", notacaofixa); // Lê a expressão infixa do usuário
+    scanf("\n%[^\n]", notacaofixa); // Lê a expressão infixa do usuário (inclui espaços e outros caracteres até a nova linha)
      
     tamanhonotacaofixa = strlen(notacaofixa); // Calcula o comprimento da expressão infixa
     
@@ -108,38 +90,38 @@ int main() {
         } else if(c == ')'){
             // Desempilha até encontrar o parêntese de abertura
             while(!isEmpty(&pilha) && peek(&pilha) != '('){
-                notacaopolonesareversa[indice++] = pop(&pilha);
+                notacaopolonesareversa[indice++] = pop(&pilha); // Adiciona operadores à notação pós-fixa
             }
             if (!isEmpty(&pilha) && peek(&pilha) == '(') {
                 pop(&pilha); // Remove o parêntese de abertura da pilha
             }
         } else if(c == '+' || c == '-' || c == '/' || c == '^' || c == '*'){
-            // Processa operadores com base na precedência (aqui que está o pulo do gato)
+            // Processa operadores com base na precedência e associatividade
             while(!isEmpty(&pilha) && (
-                 (peek(&pilha) == '*' || peek(&pilha) == '/') && (c == '+' || c == '-') ||
-                 (peek(&pilha) == '*') && (c == '/')||
-                 (peek(&pilha) == '/') && (c == '*')||
-                 (peek(&pilha) == '+') && (c == '-')||
-                 (peek(&pilha) == '-') && (c == '+')
+                 (peek(&pilha) == '*' || peek(&pilha) == '/') && (c == '+' || c == '-') || // Precedência de * e / sobre + e -
+                 (peek(&pilha) == '*') && (c == '/') || // Precedência de * sobre /
+                 (peek(&pilha) == '/') && (c == '*') || // Precedência de / sobre *
+                 (peek(&pilha) == '+') && (c == '-') || // Precedência de + sobre -
+                 (peek(&pilha) == '-') && (c == '+') // Precedência de - sobre +
                  )){
-                notacaopolonesareversa[indice++] = pop(&pilha);
+                notacaopolonesareversa[indice++] = pop(&pilha); // Adiciona operadores à notação pós-fixa
             }
             push(&pilha, c); // Empilha o operador atual
-        } else if(c == ' '){ //Ignora os espaços
+        } else if(c == ' '){ // Ignora espaços
             continue;
-        }else{
-            notacaopolonesareversa[indice++] = c; // Adiciona o operando à notação pós-fixa
+        } else {
+            notacaopolonesareversa[indice++] = c; // Adiciona operandos (variáveis ou números) à notação pós-fixa
         }
     }
     
     // Desempilha todos os operadores restantes
     while(!isEmpty(&pilha)){
-        notacaopolonesareversa[indice++] = pop(&pilha);
+        notacaopolonesareversa[indice++] = pop(&pilha); // Adiciona operadores restantes à notação pós-fixa
     }
     
-    notacaopolonesareversa[indice++] = '\0'; // Adiciona o caractere de terminação de string
+    notacaopolonesareversa[indice++] = '\0'; // Adiciona o caractere de terminação de string ao final da notação pós-fixa
     
-    printf("Notação pós-fixa: %s\n", notacaopolonesareversa); // Exibe a expressão pós-fixa
+    printf("Notação pós-fixa: %s\n", notacaopolonesareversa); // Exibe a expressão em notação pós-fixa
 
-    return 0;
+    return 0; // Retorna 0 para indicar que o programa terminou com sucesso
 }
