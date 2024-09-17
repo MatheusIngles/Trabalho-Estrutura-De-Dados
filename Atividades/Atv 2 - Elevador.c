@@ -1,9 +1,10 @@
+// Nome: Matheus Endlich Silveira - Matrícula: 202305392
+// Nome: Rafael Ferreira Bassul - Matrícula: 202305395
+
 #include <stdio.h>   // Biblioteca padrão de entrada e saída
 #include <stdlib.h>  // Biblioteca padrão para alocação de memória
 #include <stdbool.h> // Biblioteca para uso de tipo booleano
 
-// Nome: Matheus Endlich Silveira - Matrícula: 202305392
-// Nome: Rafael Ferreira Bassul - Matrícula: 202305395
 
 // Estrutura que define uma Fila
 struct Fila
