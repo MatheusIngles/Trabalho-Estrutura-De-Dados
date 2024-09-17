@@ -26,57 +26,53 @@ explicativos no código.
 
 #define TAM_MAX 100
 
-typedef struct {
-    char notacaofixa[TAM_MAX];
-} notacao;
-
 // Definição da estrutura da pilha
 typedef struct {
-    int topo;
-    notacao itens[TAM_MAX];
+    int topo;        // Índice do topo da pilha
+    char itens[TAM_MAX]; // Array para armazenar os itens da pilha
 } Pilha;
 
 // Função para inicializar a pilha
 void stack(Pilha *p) {
-    p->topo = -1;
+    p->topo = -1; // Inicializa a pilha vazia, com topo em -1
 }
 
 // Função para verificar se a pilha está cheia
 int isFull(Pilha *p) {
-    return (p->topo == TAM_MAX - 1);
+    return (p->topo == TAM_MAX - 1); // Retorna 1 se a pilha estiver cheia
 }
 
 // Função para verificar se a pilha está vazia
 int isEmpty(Pilha *p) {
-    return (p->topo == -1);
+    return (p->topo == -1); // Retorna 1 se a pilha estiver vazia
 }
 
 // Função para empilhar um elemento
 void push(Pilha *p, char valor) {
     if (isFull(p)) {
-        printf("Erro: A pilha está cheia!\n\n");
+        printf("Erro: A pilha está cheia!\n\n"); // Mensagem de erro se a pilha estiver cheia
     } else {
-        p->itens[++(p->topo)].notacaofixa[0] = valor;
+        p->itens[++(p->topo)] = valor; // Incrementa o topo e adiciona o valor
     }
 }
 
 // Função para desempilhar um elemento
-char* pop(Pilha *p) {
+char pop(Pilha *p) {
     if (isEmpty(p)) {
-        printf("Erro: A pilha está vazia!\n\n");
-        return NULL;  // Retorna NULL para indicar erro
+        printf("Erro: A pilha está vazia!\n\n"); // Mensagem de erro se a pilha estiver vazia
+        return '\0';  // Retorna NULL para indicar erro
     } else {
-        return p->itens[(p->topo)--].notacaofixa;
+        return p->itens[(p->topo)--]; // Retorna o valor do topo e decrementa o topo
     }
 }
 
 // Função para visualizar o elemento no topo da pilha
-char* peek(Pilha *p) {
+char peek(Pilha *p) {
     if (isEmpty(p)) {
-        printf("A pilha está vazia.\n\n");
-        return NULL;
+        printf("A pilha está vazia.\n\n"); // Mensagem se a pilha estiver vazia
+        return '\0';
     } else {
-        return p->itens[p->topo].notacaofixa;
+        return p->itens[p->topo]; // Retorna o valor do topo da pilha
     }
 }
 
@@ -84,38 +80,62 @@ char* peek(Pilha *p) {
 void printStack(Pilha *p) {
     if (!isEmpty(p)) {  
         for (int i = 0; i <= p->topo; i++) {
-            printf("%s", p->itens[i].notacaofixa);
+            printf("%c", p->itens[i]); // Imprime todos os elementos da pilha
         }
     } else {
-        printf("A pilha está vazia.\n\n");
+        printf("A pilha está vazia.\n\n"); // Mensagem se a pilha estiver vazia
     }
 }
 
-// Função principal para testar a pilha
+// Função principal para testar a pilha e converter a notação
 int main() {
-    Pilha NP; // Cria uma nova pilha
-    char notacaoinfixadousuario[TAM_MAX];
-    int tamanhonotacaofixa;
+    Pilha pilha; // Cria uma nova pilha
+    char notacaofixa[TAM_MAX], notacaopolonesareversa[TAM_MAX]; // Strings para notação infixa e pós-fixa
+    int tamanhonotacaofixa, indice = 0; // Tamanho da notação infixa e índice para a notação pós-fixa
+    stack(&pilha); // Inicializa a pilha com topo -1
     
-    stack(&NP); // Inicializa a pilha com topo -1
     printf("Coloque sua notação: ");
-    scanf("\n%[^\n]", notacaoinfixadousuario);
+    scanf("\n%[^\n]", notacaofixa); // Lê a expressão infixa do usuário
      
-    tamanhonotacaofixa = strlen(notacaoinfixadousuario);
+    tamanhonotacaofixa = strlen(notacaofixa); // Calcula o comprimento da expressão infixa
     
-    for(int i = 0;  i < tamanhonotacaofixa; i++){
-         if(notacaoinfixadousuario[i] == '-' || notacaoinfixadousuario[i] == '/'
-         || notacaoinfixadousuario[i] == '+' || notacaoinfixadousuario[i] == '^' 
-         || notacaoinfixadousuario[i] == '*'){
-                push(&NP,notacaoinfixadousuario[i+1]);
-                push(&NP,notacaoinfixadousuario[i]);
-                i++;
-      }
-      else{
-          push(&NP,notacaoinfixadousuario[i]);
-      }
+    // Processa cada caractere da expressão infixa
+    for(int i = 0; i < tamanhonotacaofixa; i++){
+        char c = notacaofixa[i];
+        
+        if(c == '('){
+            push(&pilha, c); // Empilha o parêntese de abertura
+        } else if(c == ')'){
+            // Desempilha até encontrar o parêntese de abertura
+            while(!isEmpty(&pilha) && peek(&pilha) != '('){
+                notacaopolonesareversa[indice++] = pop(&pilha);
+            }
+            if (!isEmpty(&pilha) && peek(&pilha) == '(') {
+                pop(&pilha); // Remove o parêntese de abertura da pilha
+            }
+        } else if(c == '+' || c == '-' || c == '/' || c == '^' || c == '*'){
+            // Processa operadores com base na precedência (aqui que está o pulo do gato)
+            while(!isEmpty(&pilha) && (
+                 (peek(&pilha) == '*' || peek(&pilha) == '/') && (c == '+' || c == '-') || 
+                 ( peek(&pilha) == '-' || peek(&pilha) == '*') && (c == '/' || c =='^'))){
+                notacaopolonesareversa[indice++] = pop(&pilha);
+            }
+            push(&pilha, c); // Empilha o operador atual
+        } else if(c == ' '){ //Ignora os espaços
+            continue;
+        }else{
+            notacaopolonesareversa[indice++] = c; // Adiciona o operando à notação pós-fixa
+        }
     }
-    printStack(&NP);
+    
+    // Desempilha todos os operadores restantes
+    while(!isEmpty(&pilha)){
+        notacaopolonesareversa[indice++] = pop(&pilha);
+    }
+    
+    notacaopolonesareversa[indice++] = '\0'; // Adiciona o caractere de terminação de string
+    
+    printf("Notação pós-fixa: %s\n", notacaopolonesareversa); // Exibe a expressão pós-fixa
 
     return 0;
 }
