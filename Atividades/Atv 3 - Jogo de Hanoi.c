@@ -1,3 +1,5 @@
+// Nome: Matheus Endlich Silveira - Matricula:202305392
+// Nome: Rafael Ferreira Bassul - Matricula: 202305395
 /* Implemente uma simulação do jogo Torre de Hanói, onde o objetivo é mover uma pilha de discos
 de um pino para outro seguindo regras específicas: apenas um disco pode ser movido por vez, e
 um disco maior não pode ser colocado sobre um disco menor. Utilize pilhas para representar
@@ -8,8 +10,6 @@ colocado sobre um disco menor.
 Por exemplo, se o pino inicial contém os discos [3, 2, 1], o objetivo é movê-los para o pino de
 destino, utilizando o pino auxiliar conforme as regras do jogo
 */
-// Nome: Matheus Endlich Silveira - Matricula:202305392
-// Nome: Rafael Ferreira Bassul - Matricula: 202305395
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
