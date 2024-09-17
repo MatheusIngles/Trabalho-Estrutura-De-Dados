@@ -14,7 +14,7 @@ Este repositório contém uma série de simulações desenvolvidas como parte da
     - Implementamos o jogo Torre de Hanói, onde o objetivo é mover uma pilha de discos de um pino para outro seguindo regras específicas. Utilizamos pilhas para representar os pinos e mover os discos conforme as regras do jogo.
   
 4. **Conversão de Expressão Aritmética da Notação Infixa para a Notação Pós-Fixa**
-    - Criamos um algoritmo para converter expressões aritméticas da notação infixa para a notação pós-fixa (notação polonesa reversa - RPN). A conversão utiliza uma pilha para armazenar operadores e gerenciar sua precedência, respeitando a ordem das operações.
+    - Criamos um algoritmo para converter expressões aritméticas da notação infixa para a notação pós-fixa (notação polonesa inversa - RPN). A conversão utiliza uma pilha para armazenar operadores e gerenciar sua precedência, respeitando a ordem das operações.
 
 ## Requisitos
 - Para executar as simulações, é necessário ter um ambiente de programação compatível com Python ou outra linguagem utilizada para a implementação das atividades.
