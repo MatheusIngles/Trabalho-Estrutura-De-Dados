@@ -1,3 +1,5 @@
+// Nome: Matheus Endlich Silveira - Matricula:202305392
+// Nome: Rafael Ferreira Bassul - Matricula: 202305395
 /* Simulação de Torneio de Pedra-Papel-Tesoura com Fila
 Desenvolva uma simulação de um torneio de Pedra-Papel-Tesoura onde os jogadores competem
 em pares e os vencedores continuam para a próxima rodada. Utilize uma fila para organizar os
@@ -7,8 +9,6 @@ continua até que reste apenas um jogador na fila, que será o campeão do torne
 se a fila inicial tiver 8 jogadores, o algoritmo deve continuar removendo pares de jogadores,
 competindo, e reordenando os vencedores até que reste apenas um vencedor final.
 */
-// Nome: Matheus Endlich Silveira - Matricula:202305392
-// Nome: Rafael Ferreira Bassul - Matricula: 202305395
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
