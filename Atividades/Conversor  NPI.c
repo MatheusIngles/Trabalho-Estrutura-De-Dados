@@ -120,7 +120,9 @@ int main() {
                  (peek(&pilha) == '*') && (c == '/') || // Precedência de * sobre /
                  (peek(&pilha) == '/') && (c == '*') || // Precedência de / sobre *
                  (peek(&pilha) == '+') && (c == '-') || // Precedência de + sobre -
-                 (peek(&pilha) == '-') && (c == '+') // Precedência de - sobre +
+                 (peek(&pilha) == '-') && (c == '+') ||
+                 (peek(&pilha) == '^') && (c == '-') ||
+                 (peek(&pilha) == '^') && (c == '+')// Precedência de - sobre +
                  )){
                 notacaopolonesareversa[indice++] = pop(&pilha); // Adiciona operadores à notação pós-fixa
             }
